@@ -1,0 +1,187 @@
+.popup {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba($color-black, .8);
+    top: 0;
+    left: 0;
+    z-index: 50000;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) or (-moz-backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        -moz-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    }
+
+    // Open states
+    &__content {        
+        @include centered;
+        width: 75%;
+        //@includeheight: 70vh;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4 rem rgba($color-black, .2);
+        border-radius: 3px;
+        display: table;
+        overflow: hidden;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        transition: all .5s .2s;
+
+        @include respond(phone) {
+            //display: inline-block;
+            width: 95%;
+        }
+    }
+
+    &__left {
+        width: 33.333333%;
+        display: table-cell;
+        
+        @include respond(laptop) {
+            width: 40%;
+        }
+
+        @include respond(tab-land) {
+            width: 45%;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+
+        @include respond(tab-port) {
+            width: 100%;
+            //height: 22rem;
+            overflow: hidden;
+            display: inline-block;           
+        }
+
+        @include respond(phone) {
+            width: 100%;
+            //height: 22rem;
+            overflow: hidden;
+            display: inline-block;
+        }
+    }
+
+    &__right {
+        width: 66.6666667%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+        
+        @include respond(laptop) {
+            width: 60%;
+            padding: 2rem;
+        }
+
+        @include respond(tab-land) {
+            width: 55%;
+            padding: 2rem;
+        }
+
+        @include respond(tab-port) {
+            width: 100%;
+            display: inline-block;
+            padding: 2rem 2rem 5rem 2rem;
+        }
+
+        @include respond(phone) {
+            width: 100%;
+            display: inline-block;
+            padding: 2rem 2rem 5rem 2rem;
+        } 
+       
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+
+        @include respond(tab-land) {
+            width: 120%;
+        }
+
+        @include respond(tab-port) {
+            width: 50%;
+            display: inline;
+            float: left; 
+        }
+
+        @include respond(phone) {
+            width: 50%;
+            display: inline;
+            float: left;        
+        }
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        
+        -moz-column-count: 2;
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-grey-light-2;
+        
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+        
+        @include respond(tab-land) {
+            column-count: auto;
+        }
+
+        @include respond(phone) {        
+            column-count: auto;
+            line-height: 2rem;
+        }
+    }
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+                
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top:3rem;
+            right: 3rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+
+            @include respond(tab-port) {
+                font-size: 7rem;
+                color: $color-black;
+                top: 1rem;
+                right: 2rem;
+            }
+
+            @include respond(phone) {
+                font-size: 7rem;
+                color: $color-black;
+                top: 1rem;
+                right: 2rem;
+            }
+        }
+
+        &:hover,
+        &:active {
+            color: $color-primary;
+        }        
+    }
+}
